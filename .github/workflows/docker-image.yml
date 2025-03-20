@@ -15,9 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Read version from file
-        id: read_version
-        run: echo "APP_VERSION=$(cut -d '|' -f 2 ./service/assets/version)" >> $GITHUB_ENV
+
+      - name: Extract tag version
+        id: extract_tag_version
+        run: echo "APP_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -35,6 +36,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .  # 这里在项目根目录找Dockerfile构建
-          platforms: linux/arm,linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true 
           tags: ${{ vars.DOCKER_IMAGE_NAME }}:${{ env.APP_VERSION }}, ${{ vars.DOCKER_IMAGE_NAME }}
