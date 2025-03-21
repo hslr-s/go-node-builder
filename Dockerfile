@@ -1,9 +1,9 @@
 FROM golang:1.21
 WORKDIR "/build"
-RUN wget https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.gz \
-    && tar -xvf node-v18.20.4-linux-x64.tar.gz \
-    && rm node-v18.20.4-linux-x64.tar.gz \
-    && mv node-v18.20.4-linux-x64/ /usr/local/nodejs \
+RUN wget https://nodejs.org/dist/v18.20.4/node-v18.20.5-linux-x64.tar.gz \
+    && tar -xvf node-v18.20.5-linux-x64.tar.gz \
+    && rm node-v18.20.5-linux-x64.tar.gz \
+    && mv node-v18.20.5-linux-x64/ /usr/local/nodejs \
     && echo 'export PATH=$PATH:/usr/local/nodejs/bin' >> /root/.bashrc \
     && /bin/bash -c "source /root/.bashrc && npm install pnpm -g" \
     && apt update \
